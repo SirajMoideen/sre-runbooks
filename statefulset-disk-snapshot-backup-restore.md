@@ -273,8 +273,7 @@ k edit sts gitlab
     ClaimName:  gitlab-pvc
     ReadOnly:   false
 ```
-
-(Placeholder: Screenshot showing the volume removal process in Kubernetes configuration)
+ZZ
 
 2. Delete the pod
 3. Now application will start normally

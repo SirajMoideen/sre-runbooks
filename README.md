@@ -322,7 +322,7 @@ This repository highlights practical SRE skills including:
 Clone the repository:
 
 ```
-git clone https://github.com/<your-username>/sre-runbooks.git
+git clone https://github.com/sirajmoideen>/sre-runbooks.git
 ```
 
 Navigate into the project:

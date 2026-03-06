@@ -1,4 +1,4 @@
-Note: while restoring the form snapshot. make sure disk Reclaim Policy/persistentVolumeReclaimPolicy is in Retain status to ignore pv deletion while mounting the new volume
+> **Note:** While restoring from a snapshot, make sure the disk Reclaim Policy (`persistentVolumeReclaimPolicy`) is set to `Retain` to prevent PV deletion while mounting the new volume.
 
 # **Statefulset disk snapshot**
 
@@ -12,7 +12,7 @@ k get volumesnapshotclass
 k describe volumesnapshotclass gitlab-snapshot-manual
 ```
 
-   2. ## To create volumesnapshotclass, Save the below as yaml (name: volumesnapshotclass.yaml)
+   2. **To create a VolumeSnapshotClass**, save the below as yaml (name: `volumesnapshotclass.yaml`)
 
 ```
 apiVersion: snapshot.storage.k8s.io/v1
@@ -29,7 +29,7 @@ deletionPolicy: Retain
 k apply -f volumesnapshotclass.yaml
 ```
 
-2. ## Take the snapshot statefulset
+2. **Take the snapshot of the StatefulSet disk**
 
    1. Create the below yaml and specify the disk(name: snapshot-gitlab.yaml)
 
@@ -145,7 +145,8 @@ spec:
 5. Attach the volume to the statefulset app yaml (check the redmarks
 
 eg: gitlab devtron application
-########################################################################################################################
+
+```yaml
 data:
 - apiVersion: v1
   kind: PersistentVolume
@@ -235,7 +236,7 @@ data:
         - name: gitlab-restored-pv
           persistentVolumeClaim:
             claimName: gitlab-restored-pvc
-# <GITLAB_PAT>
+
 - apiVersion: v1
   kind: Service
   metadata:
@@ -257,8 +258,7 @@ data:
     #   targetPort: 22
     loadBalancerSourceRanges:
     - <PUBLIC_IP_RANGE>
-
-########################################################################################################################
+```
 
 6. If there is any issues, check the logs/describe of pod and statefulset
    Note: I faced the issue like the previous volume was still shown in stateful. I followed below steps and fixed it
@@ -273,7 +273,7 @@ k edit sts gitlab
     ClaimName:  gitlab-pvc
     ReadOnly:   false
 ```
-ZZ
+
 
 2. Delete the pod
 3. Now application will start normally

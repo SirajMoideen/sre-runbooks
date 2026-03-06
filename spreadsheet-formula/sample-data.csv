@@ -1,0 +1,20 @@
+Category,Description,Sample_Input,Corrected_Formula,Expected_Result
+Text Manipulation,Extract JSON-like Keys,"{team:it,env:my-project,name:interstellar,owner:siraj,resource:vm}","=IFERROR(MID(C2, FIND(""own"", C2), FIND("","", C2&"","", FIND(""own"", C2)) - FIND(""own"", C2)), """")",owner:siraj
+Lookups,Exact Match Lookup,outpute,"=VLOOKUP(C3, Sheet1!$A$2:$B$37, 2, 0)",outpute
+Lookups,Safe Lookup with Error Handling,MissingData,"=IFERROR(VLOOKUP(C4, Sheet1!$A$2:$B$37, 2, 0), ""No Data"")",No Data
+Lookups,Cross-Sheet Exists Check,Employee_ID_1234,"=IF(COUNTIF('Feb-HRList'!$A:$A, C5) > 0, ""YES"", ""No"")",YES
+Lookups,Identify Duplicates,Duplicate_Value,"=COUNTIF(C:C, C6) > 1",TRUE
+Text Manipulation,Remove Domain,user@example.com,"=SUBSTITUTE(C7, ""@example.com"", """")",user
+Text Manipulation,Character Replacement,ABCD,"=SUBSTITUTE(C8, ""C"", ""Z"")",ABZD
+System Alerts,Extract Service Accounts,serviceAccounts/admin-sa,"=REGEXEXTRACT(C9, ""serviceAccounts/([^/]+)"")",admin-sa
+Date & Time,Months Old,1/1/2023,"=DATEDIF(C10, TODAY(), ""M"") & "" months old""",18 months old
+Date & Time,Days Old (Dynamic),5/1/2024,"=DAYS(TODAY(), C11) & "" Days""",100 Days
+Arrays & Filters,Unique Values,Duplicate_Value,"=UNIQUE(C:C)",Duplicate_Value
+Text Manipulation,Clean Double Line Breaks,"Line 1
+
+
+Line 2","=SUBSTITUTE(C13, CHAR(10)&CHAR(10), CHAR(10))","Line 1
+Line 2"
+Text Manipulation,Extract Prefix,Interstellar,"=LEFT(C14, 5)",Inter
+System Alerts,Prometheus Target Extraction,"[FIRING:2] app-backend","=REGEXEXTRACT(C15, ""\[FIRING:\d+\]\s*([\w-]+)"")",app-backend
+System Alerts,Prometheus Alert Name,alertname = PrometheusPodAvailableAlert,"=REGEXEXTRACT(C16, ""alertname\s*=\s*([\w-]+)"")",PrometheusPodAvailableAlert
